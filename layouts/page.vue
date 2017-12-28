@@ -5,7 +5,7 @@
 </style>
 <template>
 	<div>
-		<TopBar></TopBar>
+		<HeaderBar></HeaderBar>
     <div>
       <nuxt/>
     </div>
@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import TopBar from '../components/TopBar.vue';
+import HeaderBar from '../components/HeaderBar.vue';
 
 export default {
-  components: { TopBar }
+  components: { HeaderBar }
 }
 </script>

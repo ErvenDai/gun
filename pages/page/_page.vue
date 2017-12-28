@@ -17,6 +17,7 @@
   <div>
     <div class="news-container">
       <button class="add-news" @click="showAddNews = true;">添加新闻</button>
+      <AddNewsLayer v-show="showAddNews"></AddNewsLayer>
       <NewsList></NewsList>
     </div>
   </div>
@@ -25,7 +26,8 @@
 <script>
 import { mapState } from 'vuex';
 import axios from '../../plugins/axios.js';
-import NewsList from './NewsList.vue';
+import NewsList from '../../components/NewsList.vue';
+import AddNewsLayer from '../../components/AddNewsLayer.vue';
 
 
 export default {
@@ -40,7 +42,7 @@ export default {
   validate({ params, query }) {
     return !isNaN(+params.page);
   },
-  conponents: { NewsList },
+  components: { NewsList, AddNewsLayer },
   data() {
     return {
       showAddNews: false
