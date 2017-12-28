@@ -7,6 +7,7 @@
   border-bottom: 1px solid #DCDFE6;
   font-size: 16px;
   position: fixed;
+  z-index: 100;
   top: 0;
   background-color: #fff;
 }

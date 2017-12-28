@@ -1,3 +1,8 @@
+<style type="text/css">
+  body {
+    background-color: #ddd;
+  }
+</style>
 <template>
 	<div>
 		<TopBar></TopBar>

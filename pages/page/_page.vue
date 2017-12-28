@@ -1,11 +1,23 @@
+<style type="text/css" scoped>
+  .news-container {
+    position: relative;
+    width: 1200px;
+    min-height: 800px;
+    background-color: #fff; 
+    margin: 90px auto 0;
+    border-radius: 20px;
+  }
+  .add-news {
+    position: absolute;
+    right: 100px;
+    top: 80px;
+  }
+</style>
 <template>
   <div>
     <div class="news-container">
-      <div class="news-box">
-        <h1 class="news-title">新闻题目</h1>
-        <p class="news-detail">新闻描述</p>
-        <img src="" class="news-img">
-      </div>
+      <button class="add-news" @click="showAddNews = true;">添加新闻</button>
+      <NewsList></NewsList>
     </div>
   </div>
 </template>
@@ -13,22 +25,25 @@
 <script>
 import { mapState } from 'vuex';
 import axios from '../../plugins/axios.js';
-export default {
-  validate({ params, query }) {
-    // console.log(params);
-    return true;
-  },
-  async fetch({ isServer, store, params, req }) {
-    const serverRenderCookie = isServer ? req.headers.cookie : null;
+import NewsList from './NewsList.vue';
 
+
+export default {
+  async asyncData({ isServer, store, params, req }) {
+    const serverRenderCookie = isServer ? req.headers.cookie : null;
     if (!store.state.userData) {
       const res = await axios.$get('/', null, serverRenderCookie);
       if (res.data) store.commit('setUserData', res.data);
     }
   },
   layout: 'page',
+  validate({ params, query }) {
+    return !isNaN(+params.page);
+  },
+  conponents: { NewsList },
   data() {
     return {
+      showAddNews: false
     }
   },
   methods: {
@@ -38,10 +53,3 @@ export default {
   }
 };
 </script>
-<style>
-.news-container {
-  width: 40%;
-  background-color: #fff;
-  margin: 0 auto;
-}
-</style>
