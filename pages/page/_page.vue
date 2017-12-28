@@ -11,10 +11,20 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import axios from '../../plugins/axios.js';
 export default {
   validate({ params, query }) {
-    console.log(params);
+    // console.log(params);
     return true;
+  },
+  async fetch({ isServer, store, params, req }) {
+    const serverRenderCookie = isServer ? req.headers.cookie : null;
+
+    if (!store.state.userData) {
+      const res = await axios.$get('/', null, serverRenderCookie);
+      if (res.data) store.commit('setUserData', res.data);
+    }
   },
   layout: 'page',
   data() {
@@ -22,6 +32,9 @@ export default {
     }
   },
   methods: {
+  },
+  computed: {
+    ...mapState(['userData'])
   }
 };
 </script>

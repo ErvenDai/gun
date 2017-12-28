@@ -124,11 +124,12 @@ form .input-especially input {
 
 <script>
 import { mapState } from 'vuex';
+import axios from '../plugins/axios.js';
 
 export default {
   async created() {
     if (process.browser && !this.userData) {
-      const { data } = await this.$get('/');
+      const { data } = await axios.$get('/');
       if (data) this.$store.commit('setUserData', data);
     }
   },

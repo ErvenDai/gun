@@ -76,10 +76,11 @@
 </template>
 <script type="text/javascript">
 import { mapState } from 'vuex';
+import axios from '../plugins/axios.js'
 export default {
-  methods: {  
+  methods: {
     async signout() {
-      const { data } = await this.$get('/signout')
+      const { data } = await axios.$get('/signout')
 
       if (data.msg.success) {
         this.$store.commit('setUserData', null);

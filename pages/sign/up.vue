@@ -26,7 +26,7 @@
   </div>
 </template>
 <script>
-
+import axios from '../../plugins/axios.js';
 
 export default {
   layout: 'sign',
@@ -40,7 +40,7 @@ export default {
   },
   methods: {  
     async signup() {
-      const { data } = await this.$post('/signup', {
+      const { data } = await axios.$post('/signup', {
         nickname: this.nickname,
         email: this.email,
         emailCode: this.emailCode,

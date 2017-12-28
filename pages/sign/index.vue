@@ -4,6 +4,7 @@
 
 <script>
 export default {
+  layout: 'sign',
   fetch ({redirect}) {
     redirect('/sign/in');
   }

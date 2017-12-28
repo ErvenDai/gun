@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Vue from 'vue';
 
 function csrfSafeMethod(method) {
   // these HTTP methods do not require CSRF protection
@@ -20,20 +19,14 @@ for (let method in axios.defaults.headers) {
   }
 }
 
-Vue.mixin({
-  computed: {
-    $axios () {
-      return axios;
-    }
-  },
-  methods: {
-    $get(url, opts) {
-      return axios.get(url, opts);
-    },
-    $post (url, data, opts) {
-      return axios.post(url, data, opts);
-    }
-  }
-});
+//get方法 => 支持服务端渲染
+axios.$get = (url, opts, serverRenderCookie) => {
+  if (!process.browser) axios.defaults.headers.get['Cookie'] = serverRenderCookie;
+  console.log(process.browser, axios.defaults);
+  return axios.get(url, opts);    
+};
 
-export { axios };
+axios.$post = axios.post;
+
+
+export default axios;
